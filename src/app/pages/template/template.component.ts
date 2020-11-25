@@ -11,7 +11,7 @@ export class TemplateComponent implements OnInit {
   usuario = {
     nombre: 'Felipe',
     apellido: 'Colin',
-    correo: 'filip_mx1@outlook.com'
+    correo: 'felipe@gmail.com'
 }
 
   constructor() { }
@@ -20,7 +20,13 @@ export class TemplateComponent implements OnInit {
   }
   guardar( forma: NgForm){
     console.log(forma);
-    console.log(forma.value);
+
+    if( forma.invalid ){
+      Object.values( forma.controls ).forEach(control => {
+      control.markAllAsTouched();
+      });
+      return;
+    }
   }
 
 }
