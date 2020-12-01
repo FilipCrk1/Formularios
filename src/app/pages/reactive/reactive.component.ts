@@ -11,6 +11,7 @@ export class ReactiveComponent implements OnInit {
   forma: FormGroup;
   constructor(private fb: FormBuilder) {
     this.crearFormulario();
+    this.cargarDataFormulario();
    }
 
   ngOnInit(): void {
@@ -42,7 +43,19 @@ export class ReactiveComponent implements OnInit {
     })
   });
   }
-  guardar(){
+  cargarDataFormulario(){
+    this.forma.reset({
+      nombre: 'Felipe',
+      apellido: 'Colin',
+      correo: 'leonel.pipe82@gmail',
+      direccion: {
+        distrito: 'Apizaco',
+        ciudad: 'Tlaxcala'
+    }
+  });
+}
+
+  guardar() {
     console.log(this.forma);
     if ( this.forma.invalid ){
       return Object.values( this.forma.controls ).forEach(control => {
@@ -53,5 +66,8 @@ export class ReactiveComponent implements OnInit {
       }
       });
     }
+    this.forma.reset({
+      nombre: 'Sin nombre'
+    });
   }
 }
